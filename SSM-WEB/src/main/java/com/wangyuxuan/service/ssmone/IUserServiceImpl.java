@@ -29,4 +29,9 @@ public class IUserServiceImpl implements IUserService {
     public Long getTotal(Map<String, Object> map) {
         return userMapper.getTotal(map);
     }
+
+    @Override
+    public User getUserById(int userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
 }

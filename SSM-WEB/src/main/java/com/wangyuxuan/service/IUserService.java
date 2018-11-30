@@ -26,4 +26,15 @@ public interface IUserService {
      * @return
      */
     Long getTotal(Map<String, Object> map);
+
+    /**
+     *
+     * 功能描述: 通过userId获取User信息
+     *
+     * @param: [userId]
+     * @return: com.wangyuxuan.pojo.User
+     * @auther: wangyuxuan
+     * @date: 2018/11/30 14:48
+     */
+    User getUserById(int userId);
 }
