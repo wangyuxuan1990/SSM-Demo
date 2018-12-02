@@ -40,7 +40,7 @@ public class LuceneIndex {
         /**
          * 可以根据自己的需要放在具体位置
          */
-        dir = FSDirectory.open(Paths.get("/data/lucene"));
+        dir = FSDirectory.open(Paths.get("/Users/wangyuxuan/Documents/GitHub/SSM-Demo/SSM-WEB/data/lucene"));
         SmartChineseAnalyzer analyzer = new SmartChineseAnalyzer();
         IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
         IndexWriter writer = new IndexWriter(dir, iwc);
@@ -108,7 +108,7 @@ public class LuceneIndex {
         /**
          * 注意的是查询索引的位置得是存放索引的位置，不然会找不到。
          */
-        dir = FSDirectory.open(Paths.get("/data/lucene"));
+        dir = FSDirectory.open(Paths.get("/Users/wangyuxuan/Documents/GitHub/SSM-Demo/SSM-WEB/data/lucene"));
         IndexReader reader = DirectoryReader.open(dir);
         IndexSearcher is = new IndexSearcher(reader);
         BooleanQuery.Builder booleanQuery = new BooleanQuery.Builder();

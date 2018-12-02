@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>首页</title>
+    <title>${pageTitle}</title>
     <!-- Bootstrap -->
     <link rel="stylesheet"
           href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -97,57 +97,52 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div class="row">
-                <div class="col-md-6">
-                    <p>
-                        <a class="btn btn-primary" href="<%=path%>/jsonp.jsp">JsonP</a>
-                        <a class="btn btn-info" href="<%=path%>/redis/showRedis.jsp">redisDemo</a>
-                        <a class="btn btn-danger" href="#">热门</a>
-                    </p>
-                </div>
-                <div class="col-md-4 col-md-offset-2">
-                    <p class="text-right">
-                        <a class="btn btn-success" onclick="createTopic();" href="javascript:void(0)">发&nbsp;&nbsp;&nbsp;&nbsp;帖</a>
-                        <input type="hidden" id="session_username" value="${user.username }"/>
-                    </p>
-                </div>
-            </div>
-
-
             <div class="panel panel-info">
 
                 <!-- 利用一个栅格系统向右偏移完成布局 -->
-                <c:forEach var="u" items="${users }" varStatus="status">
-                    <div class="panel-heading ">
+                <c:choose>
+                    <c:when test="${userList.size()==0 }">
+                        <div align="center" style="padding-top: 20px"><font color="red">${q}</font>未查询到结果，请换个关键字试试！</div>
+                    </c:when>
+                    <c:otherwise>
+                        <div align="center" style="padding-top: 20px">
+                            查询<font color="red">${q}</font>关键字，约${resultTotal}条记录！
+                        </div>
+                        <c:forEach var="u" items="${userList }" varStatus="status">
+                            <div class="panel-heading ">
 
-                        <div class="row">
-                            <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <b>
-                                            <a href="<%=path %>/user/showUser/${u.userid}">${u.username}</a>
-                                        </b>
-                                        <br/>
-                                            ${u.description}
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <b>
+                                                    <a href="<%=path %>/user/showUser/${u.userid}">${u.username}</a>
+                                                </b>
+                                                <br/>
+                                                    ${u.description}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-2">
+                                        <p class="text-muted text-right">
+                                                ${u.password}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-md-offset-2">
-                                <p class="text-muted text-right">
-                                        ${u.password}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <p class="text-right">
+                            <div class="panel-footer">
+                                <p class="text-right">
 							<span class="label label-default">
 							<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
 							 ${u.password}
 							</span>
-                        </p>
-                    </div>
-                </c:forEach>
+                                </p>
+                            </div>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
+
                 <hr class="divider"/>
             </div>
 
