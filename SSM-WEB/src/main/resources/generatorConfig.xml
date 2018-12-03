@@ -22,9 +22,14 @@
         <javaClientGenerator targetPackage="com.wangyuxuan.dao"
                              targetProject="src/main/java" type="XMLMAPPER"/>
 
-        <table schema="ssm1" tableName="content">
-        </table>
-        <table schema="ssm1" tableName="content_log">
+        <table schema="ssm1"
+               tableName="t_user"
+               domainObjectName="T_user"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false" >
         </table>
 
     </context>
