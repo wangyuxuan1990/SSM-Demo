@@ -2,8 +2,10 @@ package com.wangyuxuan.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.wangyuxuan.lucene.LuceneIndex;
+import com.wangyuxuan.pojo.Content;
 import com.wangyuxuan.pojo.PageEntity;
 import com.wangyuxuan.pojo.User;
+import com.wangyuxuan.service.ContentService;
 import com.wangyuxuan.service.IUserService;
 import com.wangyuxuan.util.CommonUtil;
 import com.wangyuxuan.util.PageUtil;
@@ -35,6 +37,9 @@ public class IndexController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private ContentService contentService;
 
     @RequestMapping("/index")
     public String index(@RequestParam(value = "page", required = false, defaultValue = "1") int page, HttpServletRequest request, Model model) {
@@ -143,6 +148,41 @@ public class IndexController {
             jsonObject = CommonUtil.parseJson("2", "操作异常", "");
         }
 
+        //构建返回
+        CommonUtil.responseBuildJson(response, jsonObject);
+    }
+
+    /**
+     *
+     * 功能描述: 跳转聊天室页面
+     *
+     * @param: []
+     * @return: java.lang.String
+     * @auther: wangyuxuan
+     * @date: 2018/12/7 15:30
+     */
+    @RequestMapping("/turnToWebSocketIndex")
+    public String turnToWebSocketIndex(){
+        return "websocket/websocket";
+    }
+
+    /**
+     * 加载聊天记录
+     *
+     * @param response
+     */
+    @RequestMapping("/content_load")
+    public void content_load(HttpServletResponse response){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            JSONObject jo = new JSONObject();
+            List<Content> list = contentService.findContentList();
+            jo.put("contents", list);
+            jsonObject = CommonUtil.parseJson("1", "操作成功", jo);
+        }catch (Exception e){
+            logger.error("操作异常", e);
+            jsonObject = CommonUtil.parseJson("2", "操作异常", "");
+        }
         //构建返回
         CommonUtil.responseBuildJson(response, jsonObject);
     }

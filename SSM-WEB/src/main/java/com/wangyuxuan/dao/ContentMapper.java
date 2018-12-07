@@ -27,4 +27,10 @@ public interface ContentMapper {
     int updateByPrimaryKeySelective(Content record);
 
     int updateByPrimaryKey(Content record);
+
+    /**
+     * 返回所有内容
+     * @return
+     */
+    List<Content> findContentList();
 }
