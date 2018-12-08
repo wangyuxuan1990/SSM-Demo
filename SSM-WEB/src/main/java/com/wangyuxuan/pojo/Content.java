@@ -1,6 +1,8 @@
 package com.wangyuxuan.pojo;
 
-public class Content {
+import java.io.Serializable;
+
+public class Content implements Serializable {
     private Integer contentid;
 
     private String contentname;

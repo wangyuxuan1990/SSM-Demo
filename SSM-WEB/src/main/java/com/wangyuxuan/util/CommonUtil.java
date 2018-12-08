@@ -1,6 +1,7 @@
 package com.wangyuxuan.util;
 
 import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,8 +32,8 @@ public class CommonUtil {
 
     public static void responseBuildJson(HttpServletResponse response, Object jo){
         String json = "";
-        if(jo instanceof JSONObject){
-            json = JSONUtils.toJSONString(jo);
+        if(jo instanceof JSON){
+            json = JSON.toJSONString(jo);
         }else{
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
