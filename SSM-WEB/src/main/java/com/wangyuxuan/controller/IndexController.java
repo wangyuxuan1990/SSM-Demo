@@ -1,6 +1,7 @@
 package com.wangyuxuan.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.wangyuxuan.lucene.LuceneIndex;
 import com.wangyuxuan.pojo.Content;
 import com.wangyuxuan.pojo.PageEntity;
@@ -15,10 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,6 +189,14 @@ public class IndexController {
         }
         //构建返回
         CommonUtil.responseBuildJson(response, jsonObject);
+    }
+
+    @RequestMapping(value = "/jsonpInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public Object jsonpInfo(String callback, Integer userId) throws IOException {
+        User user = userService.getUserById(userId);
+        JSONPObject jsonpObject = new JSONPObject(callback, user);
+        return jsonpObject;
     }
 
 }

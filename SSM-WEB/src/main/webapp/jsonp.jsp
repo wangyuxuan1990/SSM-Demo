@@ -35,7 +35,7 @@
             $.ajax({
                 type: "get",
                 async: false,
-                url: "http://www.crossoverjie.top/SSM/jsonpInfo?callback=getUser&userId=3",
+                url: "http://localhost:8080/ssm/jsonpInfo?callback=getUser&userId=3",
                 dataType: "jsonp",
                 jsonp: "callback",//一般默认为:callback
                 jsonpCallback:"getUser",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
@@ -44,7 +44,7 @@
                      * 获得服务器返回的信息。
                      * 可以做具体的业务处理。
                      */
-                    alert('用户信息：ID： ' + json.userId + ' ，姓名： ' + json.username + '。');
+                    alert('用户信息：ID： ' + json.userid + ' ，姓名： ' + json.username + '。');
                 },
                 error: function(){
                     alert('fail');
