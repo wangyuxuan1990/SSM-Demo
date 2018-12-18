@@ -24,6 +24,11 @@ public class RediscontentServiceImpl implements RediscontentService {
     private RediscontentMapper rediscontentMapper;
 
     @Override
+    public Rediscontent selectByPrimaryKey(Integer id) {
+        return rediscontentMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
     public PageEntityNew<Rediscontent> selectByPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         List<Rediscontent> rediscontents = rediscontentMapper.selectByExample(new RediscontentExample());

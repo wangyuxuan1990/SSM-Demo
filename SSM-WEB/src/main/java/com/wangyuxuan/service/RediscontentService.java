@@ -10,5 +10,7 @@ import com.wangyuxuan.pojo.Rediscontent;
  */
 public interface RediscontentService {
 
+    Rediscontent selectByPrimaryKey(Integer id);
+
     PageEntityNew<Rediscontent> selectByPage(Integer pageNum, Integer pageSize);
 }
