@@ -258,5 +258,10 @@
             <artifactId>pagehelper</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.wangyuxuan</groupId>
+            <artifactId>SSM-API</artifactId>
+        </dependency>
+
     </dependencies>
 </project>
