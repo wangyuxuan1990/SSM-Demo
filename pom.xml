@@ -13,6 +13,7 @@
         <module>SSM-WEB</module>
         <module>SSM-API</module>
         <module>SSM-BOOT</module>
+        <module>SSM-SERVICE</module>
     </modules>
 
     <properties>
