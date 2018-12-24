@@ -264,6 +264,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.wangyuxuan</groupId>
+            <artifactId>SSM-TRACE-FILTER</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
             <exclusions>
