@@ -9,6 +9,18 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd
                         http://www.springframework.org/schema/mvc
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    <!--dubbo服务暴露为http服务-->
+    <bean class="com.wangyuxuan.dubbo.http.conf.HttpProviderConf">
+        <property name="usePackage">
+            <list>
+                <!--需要暴露服务的接口包名，可多个-->
+                <value>com.wangyuxuan.api</value>
+            </list>
+        </property>
+    </bean>
+    <!--扫描暴露包-->
+    <context:component-scan base-package="com.wangyuxuan.dubbo.http"/>
+
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
     <!--<context:component-scan base-package="com.wangyuxuan.controller" />-->
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->

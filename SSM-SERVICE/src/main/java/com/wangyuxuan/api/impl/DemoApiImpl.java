@@ -1,7 +1,7 @@
 package com.wangyuxuan.api.impl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.wangyuxuan.api.DemoApi;
-import org.springframework.stereotype.Service;
 
 /**
  * @Auther: wangyuxuan

@@ -269,6 +269,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.wangyuxuan</groupId>
+            <artifactId>SSM-HTTP-PROVIDER</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
             <exclusions>
