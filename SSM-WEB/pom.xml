@@ -263,5 +263,11 @@
             <artifactId>SSM-API</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.wangyuxuan</groupId>
+            <artifactId>SSM-REQUEST-CHECK-Demo</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 </project>
