@@ -27,4 +27,6 @@ public interface PriceVersionMapper {
     int updateByPrimaryKeySelective(PriceVersion record);
 
     int updateByPrimaryKey(PriceVersion record);
+
+    int updateByVersion(PriceVersion record);
 }
