@@ -270,10 +270,10 @@
         </dependency>
 
         <!--kafka消费所依赖的zk-->
-        <dependency>
-            <groupId>com.github.sgroschupf</groupId>
-            <artifactId>zkclient</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.sgroschupf</groupId>-->
+            <!--<artifactId>zkclient</artifactId>-->
+        <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
@@ -287,11 +287,11 @@
             </exclusions>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->
-        <dependency>
-            <groupId>org.apache.kafka</groupId>
-            <artifactId>kafka-clients</artifactId>
-            <version>2.1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.kafka</groupId>-->
+            <!--<artifactId>kafka-clients</artifactId>-->
+            <!--<version>2.1.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 </project>
