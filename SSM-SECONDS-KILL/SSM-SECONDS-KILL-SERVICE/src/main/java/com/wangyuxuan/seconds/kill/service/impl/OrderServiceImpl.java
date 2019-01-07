@@ -41,6 +41,17 @@ public class OrderServiceImpl implements OrderService {
         return id;
     }
 
+    @Override
+    public int createOptimisticOrder(int sid) throws Exception {
+        //校验库存
+        Stock stock = checkStock(sid);
+        //乐观锁更新库存
+        saleStockOptimistic(stock);
+        //创建订单
+        int id = createOrder(stock);
+        return id;
+    }
+
     private Stock checkStock(int sid) {
         Stock stock = stockService.getStockById(sid);
         if (stock.getSale().equals(stock.getCount())) {
@@ -52,6 +63,13 @@ public class OrderServiceImpl implements OrderService {
     private int saleStock(Stock stock) {
         stock.setSale(stock.getSale() + 1);
         return stockService.updateStockById(stock);
+    }
+
+    private void saleStockOptimistic(Stock stock) {
+        int count = stockService.updateStockByOptimistic(stock);
+        if(count == 0){
+            throw new RuntimeException("并发更新库存失败");
+        }
     }
 
     private int createOrder(Stock stock) {

@@ -17,4 +17,13 @@ public interface OrderService {
      * @date: 2019/1/4 15:26
      */
     int createWrongOrder(int sid) throws Exception;
+
+    /**
+     * 创建订单 乐观锁
+     * @param sid
+     * @return
+     * @throws Exception
+     */
+    int createOptimisticOrder(int sid) throws Exception;
+
 }
