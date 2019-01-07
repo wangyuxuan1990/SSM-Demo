@@ -1,5 +1,6 @@
 package com.wangyuxuan.seconds.kill.controller;
 
+import com.crossoverjie.distributed.annotation.SpringControllerLimit;
 import com.wangyuxuan.seconds.kill.api.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,25 @@ public class IndexController {
     @RequestMapping("/createOptimisticOrder/{sid}")
     @ResponseBody
     public String createOptimisticOrder(@PathVariable int sid) {
+        log.info("sid = [{}]", sid);
+        int id = 0;
+        try {
+            id = orderService.createOptimisticOrder(sid);
+        } catch (Exception e) {
+            log.error("Exception", e);
+        }
+        return String.valueOf(id);
+    }
+
+    /**
+     * 乐观锁更新库存 限流
+     * @param sid
+     * @return
+     */
+    @SpringControllerLimit(errorCode = 200)
+    @RequestMapping("/createOptimisticLimitOrder/{sid}")
+    @ResponseBody
+    public String createOptimisticLimitOrder(@PathVariable int sid) {
         log.info("sid = [{}]", sid);
         int id = 0;
         try {

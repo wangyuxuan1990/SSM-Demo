@@ -11,6 +11,15 @@
 
     <mvc:annotation-driven/>
 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <!-- 多个拦截器，按顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- 表示拦截所有的url包括子url路径 -->
+            <bean class="com.crossoverjie.distributed.intercept.SpringMVCIntercept"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -39,4 +48,22 @@
         <!-- 内存中的最大值 -->
         <property name="maxInMemorySize" value="40960"/>
     </bean>
+
+    <!-- jedis 配置 -->
+    <bean id="JedispoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxTotal" value="${redis.maxTotal}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <property name="testOnReturn" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- redis服务器中心 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="JedispoolConfig"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="hostName" value="${redis.host}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="timeout" value="${redis.timeout}"></property>
+    </bean>
+
 </beans>
