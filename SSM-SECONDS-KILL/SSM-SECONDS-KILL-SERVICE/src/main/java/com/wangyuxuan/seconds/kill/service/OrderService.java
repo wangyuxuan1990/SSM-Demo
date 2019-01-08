@@ -26,4 +26,12 @@ public interface OrderService {
      */
     int createOptimisticOrder(int sid) throws Exception;
 
+    /**
+     * 创建订单 乐观锁，库存查 Redis 减小 DB 压力。
+     * @param sid
+     * @return
+     * @throws Exception
+     */
+    int createOptimisticOrderUseRedis(int sid) throws Exception;
+
 }

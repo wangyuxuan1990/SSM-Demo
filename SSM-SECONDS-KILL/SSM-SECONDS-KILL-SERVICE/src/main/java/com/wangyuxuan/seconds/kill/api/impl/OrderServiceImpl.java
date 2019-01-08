@@ -26,4 +26,9 @@ public class OrderServiceImpl implements OrderService {
     public int createOptimisticOrder(int sid) throws Exception {
         return orderService.createOptimisticOrder(sid);
     }
+
+    @Override
+    public int createOptimisticOrderUseRedis(int sid) throws Exception {
+        return orderService.createOptimisticOrderUseRedis(sid);
+    }
 }
