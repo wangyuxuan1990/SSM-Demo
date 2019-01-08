@@ -99,4 +99,24 @@ public class IndexController {
         }
         return String.valueOf(id);
     }
+
+    /**
+     * 乐观锁更新库存 限流 库存改为查询 Redis 提高性能
+     * 异步创建订单 Kafka
+     * @param sid
+     * @return
+     */
+    @SpringControllerLimit
+    @RequestMapping("/createOptimisticLimitOrderByRedisAndKafka/{sid}")
+    @ResponseBody
+    public String createOptimisticLimitOrderByRedisAndKafka(@PathVariable int sid) {
+        log.info("sid = [{}]", sid);
+        int id = 0;
+        try {
+            orderService.createOptimisticOrderUseRedisAndKafka(sid);
+        } catch (Exception e) {
+            log.error("Exception", e);
+        }
+        return String.valueOf(id);
+    }
 }

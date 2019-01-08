@@ -7,7 +7,10 @@ import com.wangyuxuan.seconds.kill.pojo.StockOrder;
 import com.wangyuxuan.seconds.kill.service.OrderService;
 import com.wangyuxuan.seconds.kill.service.StockService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.producer.KafkaProducer;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +36,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    @Autowired
+    private KafkaProducer kafkaProducer;
+
+    @Value("${kafka.topic}")
+    private String kafkaTopic;
 
     @Override
     public int createWrongOrder(int sid) throws Exception {
@@ -66,6 +75,16 @@ public class OrderServiceImpl implements OrderService {
         //创建订单
         int id = createOrder(stock);
         return id;
+    }
+
+    @Override
+    public void createOptimisticOrderUseRedisAndKafka(int sid) throws Exception {
+        //校验库存，从 Redis 获取
+        Stock stock = checkStockByRedis(sid);
+
+        //利用 Kafka 创建订单
+        kafkaProducer.send(new ProducerRecord(kafkaTopic, stock));
+        log.info("send Kafka success");
     }
 
     private Stock checkStock(int sid) {
